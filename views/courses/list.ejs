@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/style.css">
+
+<header>Institute Course Management System</header>
+
+<nav>
+  <a href="/">Home</a>
+  <a href="/add-course">Add Course</a>
+  <a href="/courses">View Courses</a>
+</nav>
+
+<h2>All Courses</h2>
+
+<div class="table-container">
+  <% if (courses.length === 0) { %>
+    <p style="text-align:center; font-size:18px;">No courses found</p>
+  <% } else { %>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Credits</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+
+      <% courses.forEach(course => { %>
+        <tr>
+          <td><%= course.name %></td>
+          <td><%= course.code %></td>
+          <td><%= course.credits %></td>
+
+          <td>
+            <a class="edit-btn" href="/edit-course/<%= course._id %>">Edit</a>
+          </td>
+
+          <td>
+            <form action="/delete-course/<%= course._id %>?_method=DELETE" method="POST">
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } %>
+</div>
